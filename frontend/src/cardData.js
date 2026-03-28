@@ -39,13 +39,6 @@ export const DEFAULT_CARDS = [
     synopsis: 'An immersive exploration of AI, blockchain, and next-gen tech reshaping industries and creating new opportunities.',
     image: null,
   },
-  {
-    id: 6,
-    title: 'Session Zeta',
-    description: 'Create lasting impact through purpose-led leadership.',
-    synopsis: 'How visionary leaders inspire transformative change, build cultures of excellence, and leave a lasting legacy.',
-    image: null,
-  },
 ];
 
 export function loadCards() {

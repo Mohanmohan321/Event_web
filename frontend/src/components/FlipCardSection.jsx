@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const CARD_NUMS = ['01', '02', '03', '04', '05', '06'];
+const CARD_NUMS = ['01', '02', '03', '04', '05'];
 
 function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, onFlip, onSelect }) {
   return (
@@ -289,7 +289,7 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
           Choose Your Sessions
         </h2>
         <p style={{ fontSize: 12, color: '#A1A1AA', marginTop: 6, letterSpacing: '0.05em' }}>
-          Flip a card to read the synopsis — select up to <strong style={{ color: '#FAFAFA' }}>2</strong>
+          Flip a card to read the synopsis — you must select <strong style={{ color: '#FAFAFA' }}>exactly 2</strong>
         </p>
       </motion.div>
 
@@ -401,7 +401,7 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
       {/* ── Continue button ── */}
       <div style={{ padding: '12px 20px 20px', borderTop: '1px solid #27272A' }}>
         <AnimatePresence>
-          {filledCount > 0 && (
+          {filledCount === 2 && (
             <motion.button
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -420,7 +420,7 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
           fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
           color: '#3F3F46',
         }}>
-          {filledCount === 0 ? 'Flip a card → select' : filledCount === 1 ? '1 more card allowed' : 'Both slots filled'}
+          {filledCount === 0 ? 'Flip cards and select 2 sessions' : filledCount === 1 ? 'Select 1 more to continue' : 'Both slots filled — ready!'}
         </p>
       </div>
     </div>
