@@ -75,10 +75,12 @@ app.get('/data', async (req, res) => {
   }
 });
 
-// ─── GET /health ──────────────────────────────────────────────────────────────
-app.get('/health', (_req, res) => {
+// ─── GET /health + /healthz ───────────────────────────────────────────────────
+const healthHandler = (_req, res) => {
   res.json({ status: 'ok', app: 'THILINOMICE', version: '2.0.0' });
-});
+};
+app.get('/health', healthHandler);
+app.get('/healthz', healthHandler);
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
