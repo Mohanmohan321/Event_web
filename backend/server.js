@@ -10,35 +10,31 @@ app.use(cors());
 app.use(express.json());
 
 // ─── POST /submit ─────────────────────────────────────────────────────────────
-// Body: { name, phone, selectedCards: number[], slot1CardId?, slot1CardTitle?, slot2CardId?, slot2CardTitle? }
 app.post('/submit', async (req, res) => {
   const { name, phone, selectedCards, slot1CardId, slot1CardTitle, slot2CardId, slot2CardTitle } = req.body;
 
-  if (!name || typeof name !== 'string' || !name.trim()) {
+  if (!name || typeof name !== 'string' || !name.trim())
     return res.status(400).json({ error: 'name is required.' });
-  }
-  if (!phone || typeof phone !== 'string' || !phone.trim()) {
+  if (!phone || typeof phone !== 'string' || !phone.trim())
     return res.status(400).json({ error: 'phone is required.' });
-  }
-  if (!Array.isArray(selectedCards) || selectedCards.length === 0) {
+  if (!Array.isArray(selectedCards) || selectedCards.length === 0)
     return res.status(400).json({ error: 'selectedCards must be a non-empty array.' });
-  }
-  if (selectedCards.length > 2) {
+  if (selectedCards.length > 2)
     return res.status(400).json({ error: 'Maximum 2 cards can be selected.' });
-  }
 
   try {
     const result = await run(
       `INSERT INTO users
-         (name, phone, selectedCards, slot1CardId, slot1CardTitle, slot2CardId, slot2CardTitle)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+         (name, phone, selected_cards, slot1_card_id, slot1_card_title, slot2_card_id, slot2_card_title)
+       VALUES (?, ?, ?, ?, ?, ?, ?)
+       RETURNING id`,
       [
         name.trim(),
         phone.trim(),
         JSON.stringify(selectedCards),
-        slot1CardId   ?? null,
+        slot1CardId    ?? null,
         slot1CardTitle ?? null,
-        slot2CardId   ?? null,
+        slot2CardId    ?? null,
         slot2CardTitle ?? null,
       ]
     );
@@ -55,17 +51,20 @@ app.post('/submit', async (req, res) => {
 });
 
 // ─── GET /data ────────────────────────────────────────────────────────────────
-// Returns all user records with selectedCards parsed back to array.
 app.get('/data', async (req, res) => {
   try {
-    const rows = await all('SELECT * FROM users ORDER BY createdAt DESC');
+    const rows = await all('SELECT * FROM users ORDER BY created_at DESC');
 
     const users = rows.map((row) => ({
-      ...row,
-      selectedCards: (() => {
-        try { return JSON.parse(row.selectedCards); }
-        catch { return []; }
-      })(),
+      id:              row.id,
+      name:            row.name,
+      phone:           row.phone,
+      selectedCards:   (() => { try { return JSON.parse(row.selected_cards); } catch { return []; } })(),
+      slot1CardId:     row.slot1_card_id,
+      slot1CardTitle:  row.slot1_card_title,
+      slot2CardId:     row.slot2_card_id,
+      slot2CardTitle:  row.slot2_card_title,
+      createdAt:       row.created_at,
     }));
 
     res.json({ success: true, count: users.length, data: users });
@@ -75,7 +74,7 @@ app.get('/data', async (req, res) => {
   }
 });
 
-// ─── DELETE /data/:id ────────────────────────────────────────────────────────
+// ─── DELETE /data/:id ─────────────────────────────────────────────────────────
 app.delete('/data/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -93,25 +92,20 @@ app.get('/', (_req, res) => {
   res.json({
     app: 'THILINOMICE Backend',
     status: 'running',
-    endpoints: {
-      submit: 'POST /submit',
-      data:   'GET  /data',
-      health: 'GET  /health',
-    },
+    endpoints: { submit: 'POST /submit', data: 'GET /data', health: 'GET /health' },
   });
 });
 
 // ─── GET /health + /healthz ───────────────────────────────────────────────────
-const healthHandler = (_req, res) => {
+const healthHandler = (_req, res) =>
   res.json({ status: 'ok', app: 'THILINOMICE', version: '2.0.0' });
-};
 app.get('/health', healthHandler);
 app.get('/healthz', healthHandler);
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`\nTHILINOMICE backend running on port ${PORT}`);
-  console.log(`  POST /submit  — save a registration`);
-  console.log(`  GET  /data    — fetch all registrations`);
-  console.log(`  GET  /health  — health check\n`);
+  console.log(`  POST /submit — save a registration`);
+  console.log(`  GET  /data   — fetch all registrations`);
+  console.log(`  GET  /health — health check\n`);
 });

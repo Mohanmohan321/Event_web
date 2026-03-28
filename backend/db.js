@@ -1,66 +1,48 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { Pool } = require('pg');
 
-const DB_PATH = path.join(__dirname, 'database.db');
+if (!process.env.DATABASE_URL) {
+  console.error('ERROR: DATABASE_URL environment variable is not set.');
+  process.exit(1);
+}
 
-const db = new sqlite3.Database(DB_PATH, (err) => {
-  if (err) {
-    console.error('Failed to connect to database:', err.message);
-    process.exit(1);
-  }
-  console.log('Connected to SQLite database at', DB_PATH);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 // Create table on startup
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id            INTEGER PRIMARY KEY AUTOINCREMENT,
-      name          TEXT    NOT NULL,
-      phone         TEXT    NOT NULL,
-      selectedCards TEXT    NOT NULL,
-      slot1CardId   INTEGER,
-      slot1CardTitle TEXT,
-      slot2CardId   INTEGER,
-      slot2CardTitle TEXT,
-      createdAt     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-  `, (err) => {
-    if (err) console.error('Table creation error:', err.message);
-    else console.log('Table "users" ready.');
-  });
-});
+pool.query(`
+  CREATE TABLE IF NOT EXISTS users (
+    id            SERIAL PRIMARY KEY,
+    name          TEXT    NOT NULL,
+    phone         TEXT    NOT NULL,
+    selected_cards TEXT   NOT NULL,
+    slot1_card_id  INTEGER,
+    slot1_card_title TEXT,
+    slot2_card_id  INTEGER,
+    slot2_card_title TEXT,
+    created_at    TIMESTAMPTZ DEFAULT NOW()
+  )
+`)
+  .then(() => console.log('Table "users" ready.'))
+  .catch((err) => { console.error('Table creation error:', err.message); process.exit(1); });
 
-// ─── Promisified helpers ──────────────────────────────────────────────────────
-
-/** Run INSERT / UPDATE / DELETE — resolves with { lastID, changes } */
-function run(sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) reject(err);
-      else resolve({ lastID: this.lastID, changes: this.changes });
-    });
-  });
+// Convert SQLite-style ? placeholders → PostgreSQL $1 $2 ...
+function toPostgres(sql) {
+  let i = 0;
+  return sql.replace(/\?/g, () => `$${++i}`);
 }
 
-/** Fetch all rows — resolves with array */
-function all(sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.all(sql, params, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
-    });
-  });
+/** INSERT / UPDATE / DELETE — resolves with { lastID, changes } */
+async function run(sql, params = []) {
+  const res = await pool.query(toPostgres(sql), params);
+  return { lastID: res.rows[0]?.id ?? null, changes: res.rowCount };
 }
 
-/** Fetch single row — resolves with row or undefined */
-function get(sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, (err, row) => {
-      if (err) reject(err);
-      else resolve(row);
-    });
-  });
+/** SELECT many — resolves with array of rows */
+async function all(sql, params = []) {
+  const res = await pool.query(toPostgres(sql), params);
+  return res.rows;
 }
 
-module.exports = { run, all, get };
+module.exports = { run, all };
