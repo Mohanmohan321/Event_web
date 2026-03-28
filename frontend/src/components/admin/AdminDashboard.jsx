@@ -252,12 +252,11 @@ export default function AdminDashboard({ onLogout }) {
   const [tab, setTab] = useState('submissions');
   const [submissions, setSubmissions] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [cards, setCards] = useState([]);
   const [editingCard, setEditingCard] = useState(null);
   const [nameSearch, setNameSearch] = useState('');
-  // slotFilter: null | 1 | 2
   const [slotFilter, setSlotFilter] = useState(null);
-  // cardFilters: array of card IDs to filter within the chosen slot (or any slot if no slot selected)
   const [cardFilters, setCardFilters] = useState([]);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
 
@@ -267,10 +266,15 @@ export default function AdminDashboard({ onLogout }) {
     setCards(saved ? JSON.parse(saved) : DEFAULT_CARDS);
   }, []);
 
-  // Fetch submissions from backend; fall back to localStorage if unavailable
-  useEffect(() => {
+  // Fetch submissions from backend with 20s timeout + retry support
+  const fetchSubmissions = () => {
     setLoadingData(true);
-    fetch(`${BACKEND_URL}/data`)
+    setFetchError(false);
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
+
+    fetch(`${BACKEND_URL}/data`, { signal: controller.signal })
       .then((r) => r.json())
       .then((json) => {
         if (json.success && Array.isArray(json.data)) {
@@ -279,12 +283,11 @@ export default function AdminDashboard({ onLogout }) {
           throw new Error('bad response');
         }
       })
-      .catch(() => {
-        // Backend unreachable — use localStorage copy
-        setSubmissions(JSON.parse(localStorage.getItem(STORAGE_KEYS.submissions) || '[]'));
-      })
-      .finally(() => setLoadingData(false));
-  }, []);
+      .catch(() => setFetchError(true))
+      .finally(() => { clearTimeout(timer); setLoadingData(false); });
+  };
+
+  useEffect(() => { fetchSubmissions(); }, []);
 
   const handleCardSaved = (updated) => {
     const next = cards.map((c) => (c.id === updated.id ? updated : c));
@@ -444,7 +447,28 @@ export default function AdminDashboard({ onLogout }) {
               {loadingData && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '28px 20px', borderBottom: '1px solid #27272A' }}>
                   <span className="spinner" style={{ borderTopColor: '#1F51FF', borderColor: '#27272A', width: 16, height: 16 }} />
-                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#3F3F46' }}>Loading…</p>
+                  <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#3F3F46' }}>Fetching data…</p>
+                </div>
+              )}
+
+              {/* ── Error / retry state ── */}
+              {!loadingData && fetchError && (
+                <div style={{ padding: '24px 20px', borderBottom: '1px solid #27272A', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A1A1AA', textAlign: 'center', lineHeight: 1.6 }}>
+                    Backend waking up — can take ~30 sec on first load
+                  </p>
+                  <button
+                    onClick={fetchSubmissions}
+                    style={{
+                      padding: '0 24px', height: 44,
+                      background: '#1F51FF', border: 'none', color: '#FFFFFF',
+                      fontFamily: 'Space Grotesk, sans-serif', fontSize: 11,
+                      fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    ↺ Retry
+                  </button>
                 </div>
               )}
 
