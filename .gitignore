@@ -1,0 +1,17 @@
+# Backend
+backend/node_modules/
+backend/database.db
+backend/thilinomice.db
+backend/*.db-journal
+backend/*.db-wal
+backend/*.db-shm
+backend/.env
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# OS
+.DS_Store
+Thumbs.db
