@@ -75,6 +75,19 @@ app.get('/data', async (req, res) => {
   }
 });
 
+// ─── GET / ────────────────────────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.json({
+    app: 'THILINOMICE Backend',
+    status: 'running',
+    endpoints: {
+      submit: 'POST /submit',
+      data:   'GET  /data',
+      health: 'GET  /health',
+    },
+  });
+});
+
 // ─── GET /health + /healthz ───────────────────────────────────────────────────
 const healthHandler = (_req, res) => {
   res.json({ status: 'ok', app: 'THILINOMICE', version: '2.0.0' });
