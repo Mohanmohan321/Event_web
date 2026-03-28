@@ -75,6 +75,19 @@ app.get('/data', async (req, res) => {
   }
 });
 
+// ─── DELETE /data/:id ────────────────────────────────────────────────────────
+app.delete('/data/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await run('DELETE FROM users WHERE id = ?', [id]);
+    if (result.changes === 0) return res.status(404).json({ error: 'Record not found.' });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('DELETE /data/:id error:', err.message);
+    res.status(500).json({ error: 'Failed to delete record.' });
+  }
+});
+
 // ─── GET / ────────────────────────────────────────────────────────────────────
 app.get('/', (_req, res) => {
   res.json({
