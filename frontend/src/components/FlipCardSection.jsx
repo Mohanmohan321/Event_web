@@ -22,8 +22,8 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
         <div
           className="card-face card-front w-full h-full flex flex-col"
           style={{
-            background: isSelected ? '#DFE104' : '#09090B',
-            border: `2px solid ${isSelected ? '#DFE104' : '#3F3F46'}`,
+            background: isSelected ? '#1F51FF' : '#09090B',
+            border: `2px solid ${isSelected ? '#1F51FF' : '#3F3F46'}`,
             padding: '16px 16px 14px',
             transition: 'background 0.25s, border-color 0.25s',
           }}
@@ -34,7 +34,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
               style={{
                 fontSize: 10, fontWeight: 700,
                 letterSpacing: '0.2em', textTransform: 'uppercase',
-                color: isSelected ? '#000000' : '#A1A1AA',
+                color: isSelected ? '#FFFFFF' : '#A1A1AA',
                 fontFamily: 'Space Grotesk, sans-serif',
               }}
             >
@@ -49,7 +49,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
                   fontSize: 10, fontWeight: 700,
                   letterSpacing: '0.15em', textTransform: 'uppercase',
                   background: '#000000',
-                  color: '#DFE104',
+                  color: '#1F51FF',
                   padding: '3px 8px',
                 }}
               >
@@ -96,7 +96,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
                 fontFamily: 'Space Grotesk, sans-serif',
                 fontSize: 14, fontWeight: 700,
                 letterSpacing: '0.04em', textTransform: 'uppercase',
-                color: isSelected ? '#000000' : '#FAFAFA',
+                color: isSelected ? '#FFFFFF' : '#FAFAFA',
                 lineHeight: 1.2,
                 marginBottom: 5,
                 transition: 'color 0.25s',
@@ -122,7 +122,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
           className="card-face card-back w-full h-full flex flex-col"
           style={{
             background: '#09090B',
-            border: `2px solid ${isSelected ? '#DFE104' : '#3F3F46'}`,
+            border: `2px solid ${isSelected ? '#1F51FF' : '#3F3F46'}`,
             padding: '16px 16px 14px',
           }}
           onClick={(e) => e.stopPropagation()}
@@ -133,7 +133,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
               style={{
                 fontSize: 9, fontWeight: 700,
                 letterSpacing: '0.3em', textTransform: 'uppercase',
-                color: '#DFE104',
+                color: '#1F51FF',
                 display: 'block', marginBottom: 4,
               }}
             >
@@ -191,7 +191,7 @@ function FlipCard({ card, index, isFlipped, isSelected, canSelect, slotLabel, on
                 border: 'none', borderRadius: 0, cursor: 'pointer',
                 transition: 'background 0.2s, color 0.2s',
                 ...(isSelected
-                  ? { background: '#DFE104', color: '#000000' }
+                  ? { color: '#FFFFFF' }
                   : canSelect
                   ? { background: '#FAFAFA', color: '#000000' }
                   : { background: '#27272A', color: '#3F3F46', cursor: 'not-allowed' }
@@ -274,7 +274,7 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
         animate={{ opacity: 1, y: 0 }}
         style={{ padding: '20px 20px 0', borderBottom: '1px solid #27272A', paddingBottom: 16 }}
       >
-        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 4 }}>
+        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 4 }}>
           THILINOMICE
         </p>
         <h2
@@ -309,11 +309,11 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
                 flex: 1,
                 padding: '12px 20px',
                 borderRight: slot === 0 ? '1px solid #27272A' : 'none',
-                background: card ? 'rgba(223,225,4,0.06)' : 'transparent',
+                background: card ? 'rgba(31,81,255,0.08)' : 'transparent',
                 transition: 'background 0.2s',
               }}
             >
-              <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: card ? '#DFE104' : '#3F3F46', marginBottom: 3 }}>
+              <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: card ? '#1F51FF' : '#3F3F46', marginBottom: 3 }}>
                 Slot {slot + 1}
               </p>
               <p style={{ fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', color: card ? '#FAFAFA' : '#3F3F46', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -391,7 +391,7 @@ export default function FlipCardSection({ cards, selectedCards, setSelectedCards
             style={{
               height: 4,
               width: i === activeIndex ? 24 : 6,
-              background: i === activeIndex ? '#DFE104' : '#27272A',
+              background: i === activeIndex ? '#1F51FF' : '#27272A',
               transition: 'all 0.25s',
             }}
           />

@@ -34,17 +34,17 @@ export default function AdminLogin({ onLogin }) {
           <div
             style={{
               width: 48, height: 48,
-              border: '2px solid #DFE104',
+              border: '2px solid #1F51FF',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: 20,
             }}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <rect x="2" y="2" width="18" height="18" stroke="#DFE104" strokeWidth="1.5" fill="none" />
+              <rect x="2" y="2" width="18" height="18" stroke="#1F51FF" strokeWidth="1.5" fill="none" />
               <path d="M6 11h10M11 6v10" stroke="#FAFAFA" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </div>
-          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 6 }}>
+          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 6 }}>
             SPI EDGE
           </p>
           <h1

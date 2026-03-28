@@ -7,7 +7,7 @@ function ConfettiPiece({ delay, isYellow }) {
         position: 'absolute',
         width: isYellow ? 8 : 6,
         height: isYellow ? 3 : 6,
-        background: isYellow ? '#DFE104' : '#FAFAFA',
+        background: isYellow ? '#1F51FF' : '#FAFAFA',
         left: `${Math.random() * 100}%`,
         top: '-10px',
       }}
@@ -45,9 +45,9 @@ export default function SuccessScreen({ selectedCards, cards }) {
         initial={{ y: '-100%' }}
         animate={{ y: 0 }}
         transition={{ duration: 0.45, ease: [0.2, 0, 0, 1] }}
-        style={{ background: '#DFE104', padding: '28px 20px 24px' }}
+        style={{ background: '#1F51FF', padding: '28px 20px 24px' }}
       >
-        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#000000', marginBottom: 6 }}>
+        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#FFFFFF', marginBottom: 6 }}>
           Registration Complete
         </p>
         <h1
@@ -102,17 +102,14 @@ export default function SuccessScreen({ selectedCards, cards }) {
                       <span
                         style={{
                           width: 36, height: 36,
-                          background: '#DFE104',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontFamily: 'Orbitron, sans-serif', fontWeight: 900,
-                          fontSize: 12, color: '#000',
+                          color: '#FFFFFF',
                         }}
                       >
                         S{slotIdx + 1}
                       </span>
                     </div>
                     <div>
-                      <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 2 }}>
+                      <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 2 }}>
                         Slot {slotIdx + 1}
                       </p>
                       <p style={{ fontSize: 14, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: '#FAFAFA' }}>
@@ -142,7 +139,7 @@ export default function SuccessScreen({ selectedCards, cards }) {
           </div>
           <div style={{ textAlign: 'right' }}>
             <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#3F3F46', marginBottom: 3 }}>Event</p>
-            <p style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 16, fontWeight: 900, letterSpacing: '0.05em', color: '#DFE104' }}>THILINOMICE</p>
+            <p style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 16, fontWeight: 900, letterSpacing: '0.05em', color: '#1F51FF' }}>THILINOMICE</p>
           </div>
         </motion.div>
 

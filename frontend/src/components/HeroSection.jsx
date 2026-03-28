@@ -20,7 +20,7 @@ function LogoBox({ label }) {
         }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="2" width="20" height="20" stroke="#DFE104" strokeWidth="1.5" fill="none" />
+          <rect x="2" y="2" width="20" height="20" stroke="#1F51FF" strokeWidth="1.5" fill="none" />
           <path d="M6 12h12M12 6l6 6-6 6" stroke="#FAFAFA" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </div>
@@ -82,7 +82,7 @@ export default function HeroSection({ onStart }) {
           style={{
             fontSize: 10, fontWeight: 700,
             letterSpacing: '0.3em', textTransform: 'uppercase',
-            color: '#DFE104',
+            color: '#1F51FF',
             marginBottom: 12,
           }}
         >
@@ -114,7 +114,7 @@ export default function HeroSection({ onStart }) {
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.4, duration: 0.4 }}
           style={{
-            height: 3, background: '#DFE104',
+            height: 3, background: '#1F51FF',
             width: '100%', transformOrigin: 'left',
             marginBottom: 16,
           }}
@@ -181,7 +181,7 @@ export default function HeroSection({ onStart }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        style={{ background: '#DFE104', borderTop: '2px solid #DFE104', overflow: 'hidden' }}
+        style={{ background: '#1F51FF', borderTop: '2px solid #1F51FF', overflow: 'hidden' }}
       >
         <div className="marquee-wrap" style={{ padding: '10px 0' }}>
           <div className="marquee-track">

@@ -72,7 +72,7 @@ export default function UserForm({ selectedCards, cards, onSuccess, onBack }) {
 
       {/* ── Header ── */}
       <div style={{ padding: '20px 20px 16px', borderBottom: '1px solid #27272A' }}>
-        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 4 }}>
+        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 4 }}>
           Almost There
         </p>
         <h2
@@ -112,10 +112,7 @@ export default function UserForm({ selectedCards, cards, onSuccess, onBack }) {
                 <div
                   style={{
                     width: 36, height: 36,
-                    background: '#DFE104',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'Orbitron, sans-serif', fontWeight: 900,
-                    fontSize: 12, color: '#000',
+                    color: '#FFFFFF',
                   }}
                 >
                   S{slotIdx + 1}
@@ -233,7 +230,7 @@ export default function UserForm({ selectedCards, cards, onSuccess, onBack }) {
               fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 12, fontWeight: 700,
               letterSpacing: '0.15em', textTransform: 'uppercase',
-              background: loading ? '#A1A1AA' : '#DFE104',
+              background: loading ? '#A1A1AA' : '#1F51FF',
               border: 'none',
               color: '#000000',
               cursor: loading ? 'not-allowed' : 'pointer',

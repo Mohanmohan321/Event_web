@@ -68,7 +68,7 @@ function CardEditorModal({ card, onClose, onSaved }) {
         style={{
           position: 'relative', zIndex: 10, width: '100%', maxWidth: 520,
           background: '#09090B',
-          borderTop: '2px solid #DFE104',
+          borderTop: '2px solid #1F51FF',
           padding: '24px 20px 32px',
           maxHeight: '92dvh', overflowY: 'auto',
         }}
@@ -77,7 +77,7 @@ function CardEditorModal({ card, onClose, onSaved }) {
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 28, stiffness: 260 }}
       >
-        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 4 }}>Editing</p>
+        <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 4 }}>Editing</p>
         <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 22, fontWeight: 700, textTransform: 'uppercase', color: '#FAFAFA', marginBottom: 24 }}>
           Card {String(card.id).padStart(2, '0')}
         </h3>
@@ -175,7 +175,7 @@ function CardEditorModal({ card, onClose, onSaved }) {
               fontSize: 16, fontWeight: 500, width: '100%',
               outline: 'none', resize: 'none', padding: '8px 0', lineHeight: 1.6,
             }}
-            onFocus={(e) => e.target.style.borderBottomColor = '#DFE104'}
+            onFocus={(e) => e.target.style.borderBottomColor = '#1F51FF'}
             onBlur={(e) => e.target.style.borderBottomColor = '#3F3F46'}
           />
           <p style={{ fontSize: 9, color: '#3F3F46', textAlign: 'right', marginTop: 4 }}>{description.length}/200</p>
@@ -195,7 +195,7 @@ function CardEditorModal({ card, onClose, onSaved }) {
               fontSize: 16, fontWeight: 500, width: '100%',
               outline: 'none', resize: 'none', padding: '8px 0', lineHeight: 1.6,
             }}
-            onFocus={(e) => e.target.style.borderBottomColor = '#DFE104'}
+            onFocus={(e) => e.target.style.borderBottomColor = '#1F51FF'}
             onBlur={(e) => e.target.style.borderBottomColor = '#3F3F46'}
           />
           <p style={{ fontSize: 9, color: '#3F3F46', textAlign: 'right', marginTop: 4 }}>{synopsis.length}/400</p>
@@ -216,7 +216,7 @@ function CardEditorModal({ card, onClose, onSaved }) {
           </button>
           <button
             onClick={handleSave}
-            style={{ flex: 2, minHeight: 52, fontFamily: 'Space Grotesk, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', background: '#DFE104', border: 'none', color: '#000', cursor: 'pointer' }}
+            style={{ flex: 2, minHeight: 52, fontFamily: 'Space Grotesk, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#FFFFFF', cursor: 'pointer' }}
           >
             Save Changes
           </button>
@@ -369,7 +369,7 @@ export default function AdminDashboard({ onLogout }) {
       {/* ── Header ── */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #27272A' }}>
         <div>
-          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#DFE104', marginBottom: 2 }}>Admin</p>
+          <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1F51FF', marginBottom: 2 }}>Admin</p>
           <h1 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: 18, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.02em', color: '#FAFAFA' }}>
             THILINOMICE
           </h1>
@@ -401,7 +401,7 @@ export default function AdminDashboard({ onLogout }) {
         ].map((stat, i) => (
           <div key={stat.label} style={{ flex: 1, padding: '16px 20px', borderBottom: '1px solid #27272A', borderRight: i === 0 ? '1px solid #27272A' : 'none' }}>
             <p style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#A1A1AA', marginBottom: 4 }}>{stat.label}</p>
-            <p style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 32, fontWeight: 900, color: stat.value > 0 ? '#DFE104' : '#27272A', lineHeight: 1 }}>
+            <p style={{ fontFamily: 'Orbitron, sans-serif', fontSize: 32, fontWeight: 900, color: stat.value > 0 ? '#1F51FF' : '#27272A', lineHeight: 1 }}>
               {String(stat.value).padStart(2, '0')}
             </p>
           </div>
@@ -419,10 +419,10 @@ export default function AdminDashboard({ onLogout }) {
               fontFamily: 'Space Grotesk, sans-serif',
               fontSize: 10, fontWeight: 700,
               letterSpacing: '0.2em', textTransform: 'uppercase',
-              background: tab === t.id ? '#DFE104' : 'transparent',
+              background: tab === t.id ? '#1F51FF' : 'transparent',
               border: 'none',
               borderRight: t.id === 'submissions' ? '1px solid #27272A' : 'none',
-              color: tab === t.id ? '#000000' : '#A1A1AA',
+              color: tab === t.id ? '#FFFFFF' : '#A1A1AA',
               cursor: 'pointer',
               transition: 'background 0.15s, color 0.15s',
             }}
@@ -443,7 +443,7 @@ export default function AdminDashboard({ onLogout }) {
               {/* ── Loading state ── */}
               {loadingData && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '28px 20px', borderBottom: '1px solid #27272A' }}>
-                  <span className="spinner" style={{ borderTopColor: '#DFE104', borderColor: '#27272A', width: 16, height: 16 }} />
+                  <span className="spinner" style={{ borderTopColor: '#1F51FF', borderColor: '#27272A', width: 16, height: 16 }} />
                   <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#3F3F46' }}>Loading…</p>
                 </div>
               )}
@@ -478,10 +478,10 @@ export default function AdminDashboard({ onLogout }) {
                     onClick={() => setShowFilterPanel((v) => !v)}
                     style={{
                       minHeight: 48, padding: '0 16px',
-                      background: activeFilterCount > 0 ? '#DFE104' : 'transparent',
+                      background: activeFilterCount > 0 ? '#1F51FF' : 'transparent',
                       borderTop: 'none', borderBottom: 'none', borderRight: 'none',
                       borderLeft: '1px solid #27272A',
-                      color: activeFilterCount > 0 ? '#000' : '#A1A1AA',
+                      color: activeFilterCount > 0 ? '#FFFFFF' : '#A1A1AA',
                       cursor: 'pointer',
                       display: 'flex', alignItems: 'center', gap: 6,
                       fontFamily: 'Space Grotesk, sans-serif', fontSize: 10, fontWeight: 700,
@@ -494,7 +494,7 @@ export default function AdminDashboard({ onLogout }) {
                     </svg>
                     Filter
                     {activeFilterCount > 0 && (
-                      <span style={{ background: activeFilterCount > 0 ? '#000' : '#27272A', color: '#DFE104', borderRadius: 2, padding: '1px 5px', fontSize: 9, fontWeight: 900 }}>
+                      <span style={{ background: activeFilterCount > 0 ? '#000' : '#27272A', color: '#1F51FF', borderRadius: 2, padding: '1px 5px', fontSize: 9, fontWeight: 900 }}>
                         {activeFilterCount}
                       </span>
                     )}
@@ -528,9 +528,9 @@ export default function AdminDashboard({ onLogout }) {
                                   height: 36, padding: '0 16px',
                                   fontFamily: 'Space Grotesk, sans-serif', fontSize: 10, fontWeight: 700,
                                   letterSpacing: '0.15em', textTransform: 'uppercase',
-                                  background: active ? '#DFE104' : 'transparent',
-                                  border: `2px solid ${active ? '#DFE104' : '#3F3F46'}`,
-                                  color: active ? '#000' : '#71717A',
+                                  background: active ? '#1F51FF' : 'transparent',
+                                  border: `2px solid ${active ? '#1F51FF' : '#3F3F46'}`,
+                                  color: active ? '#FFFFFF' : '#71717A',
                                   cursor: 'pointer',
                                   transition: 'all 0.12s',
                                 }}
@@ -555,9 +555,9 @@ export default function AdminDashboard({ onLogout }) {
                                 style={{
                                   minWidth: 48, height: 36,
                                   fontFamily: 'Orbitron, sans-serif', fontSize: 11, fontWeight: 900,
-                                  background: active ? '#DFE104' : 'transparent',
-                                  border: `2px solid ${active ? '#DFE104' : '#3F3F46'}`,
-                                  color: active ? '#000' : '#71717A',
+                                  background: active ? '#1F51FF' : 'transparent',
+                                  border: `2px solid ${active ? '#1F51FF' : '#3F3F46'}`,
+                                  color: active ? '#FFFFFF' : '#71717A',
                                   cursor: 'pointer',
                                   transition: 'all 0.12s',
                                 }}
@@ -594,7 +594,7 @@ export default function AdminDashboard({ onLogout }) {
                     )}
                     {/* Slot chip */}
                     {slotFilter !== null && (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#DFE104', padding: '4px 10px', fontSize: 10, fontWeight: 900, color: '#000', fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 5, color: '#FFFFFF', fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                         Slot {slotFilter}
                         <button onClick={() => toggleSlotFilter(slotFilter)} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', padding: 0, display: 'flex', marginLeft: 2 }}>
                           <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -642,7 +642,7 @@ export default function AdminDashboard({ onLogout }) {
                   >
                     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 10 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <span style={{ width: 36, height: 36, background: '#DFE104', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Orbitron, sans-serif', fontWeight: 900, fontSize: 12, color: '#000', flexShrink: 0 }}>
+                        <span style={{ width: 36, height: 36, color: '#FFFFFF', flexShrink: 0 }}>
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                         <div>
@@ -678,7 +678,7 @@ export default function AdminDashboard({ onLogout }) {
                               marginRight: si === 0 ? 6 : 0,
                             }}
                           >
-                            <span style={{ fontSize: 9, fontWeight: 900, color: '#DFE104', fontFamily: 'Orbitron, sans-serif', flexShrink: 0 }}>{slot.label}</span>
+                            <span style={{ fontSize: 9, fontWeight: 900, color: '#1F51FF', fontFamily: 'Orbitron, sans-serif', flexShrink: 0 }}>{slot.label}</span>
                             <span style={{ fontSize: 11, fontWeight: 600, color: '#FAFAFA', textTransform: 'uppercase', letterSpacing: '0.03em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{slot.title}</span>
                           </div>
                         ) : (
